@@ -1,0 +1,16 @@
+{
+    "configurations": [
+        {
+            "name": "clangd",
+            "compileCommands": "${workspaceFolder}/build/compile_commands.json",
+            "configurationProvider": "llvm-vs-code-extensions.vscode-clangd",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            }
+        }
+    ],
+    "version": 4
+}
