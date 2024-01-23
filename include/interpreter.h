@@ -1,7 +1,7 @@
 #pragma once
 
-#include "utils.h"
 #include "opcodes.h"
+#include "utils.h"
 
 namespace bf {
 
@@ -21,4 +21,4 @@ public:
     void run(std::vector<OPCODE>& program);
 };
 
-}
+}  // namespace bf
