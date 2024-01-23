@@ -28,6 +28,12 @@ std::vector<OPCODE> Parser::parse(std::vector<char>& _rawInput) {
             case ']':
                 program[pos] = OPCODE::JMP_BK;
                 break;
+            case '.':
+                program[pos] = OPCODE::WRITE;
+                break;
+            case ',':
+                program[pos] = OPCODE::READ;
+                break;
             default:
                 break;
         }

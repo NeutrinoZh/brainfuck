@@ -10,12 +10,15 @@ message("Building with CMake version: ${CMAKE_VERSION}")
 
 set(HEADERS
     ./include/utils.h
+    ./include/opcodes.h
     ./include/parser.h
+    ./include/interpreter.h
 )
 
 set(SOURCES
     ./src/main.cpp
     ./src/parser.cpp
+    ./src/interpreter.cpp
 )
 
 add_executable(${PROJECT_NAME} ${HEADERS} ${SOURCES})

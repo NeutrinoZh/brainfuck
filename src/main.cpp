@@ -1,3 +1,4 @@
+#include "interpreter.h"
 #include "parser.h"
 #include "utils.h"
 
@@ -23,7 +24,10 @@ int main(int argc, char** argv) {
     file.close();
 
     bf::Parser parser;
-    parser.parse(buffer);
+    auto program = parser.parse(buffer);
+
+    bf::Interpreter interpreter(10000);
+    interpreter.run(program);
     
     return EXIT_SUCCESS;
 }
