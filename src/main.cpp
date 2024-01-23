@@ -1,3 +1,4 @@
+#include "parser.h"
 #include "utils.h"
 
 int main(int argc, char** argv) {
@@ -20,6 +21,9 @@ int main(int argc, char** argv) {
     file.read(buffer.data(), size);
 
     file.close();
+
+    bf::Parser parser;
+    parser.parse(buffer);
     
     return EXIT_SUCCESS;
 }
