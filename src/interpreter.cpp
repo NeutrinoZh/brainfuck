@@ -55,6 +55,8 @@ void Interpreter::run(std::vector<OPCODE>& _program) {
                     if (_program[it] == OPCODE::JMP_BK) ++brc;
                 }
 
+                --it;
+
                 break;
             case OPCODE::WRITE:
                 std::cout << m_vm.memory[m_vm.pointer];
