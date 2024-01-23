@@ -55,7 +55,7 @@ void Interpreter::run(std::vector<OPCODE>& _program) {
                     if (_program[it] == OPCODE::JMP_BK) ++brc;
                 }
 
-                --it;
+                //--it;
 
                 break;
             case OPCODE::WRITE:

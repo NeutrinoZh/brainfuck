@@ -6,33 +6,33 @@ std::vector<OPCODE> Parser::parse(std::vector<char>& _rawInput) {
     size_t size = _rawInput.size();
     size_t pos = 0;
     
-    std::vector<OPCODE> program(size);
+    std::vector<OPCODE> program;
     
     for (; pos < size; ++pos)
         switch (_rawInput[pos]) {
             case '+':
-                program[pos] = OPCODE::INC;
+                program.push_back(OPCODE::INC);
                 break;
             case '-':
-                program[pos] = OPCODE::DEC;
+                program.push_back(OPCODE::DEC);
                 break;
             case '>':
-                program[pos] = OPCODE::NEXT;
+                program.push_back(OPCODE::NEXT);
                 break;
             case '<':
-                program[pos] = OPCODE::PREV;
+                program.push_back(OPCODE::PREV);
                 break;
             case '[':
-                program[pos] = OPCODE::JMP_FW;
+                program.push_back(OPCODE::JMP_FW);
                 break;
             case ']':
-                program[pos] = OPCODE::JMP_BK;
+                program.push_back(OPCODE::JMP_BK);
                 break;
             case '.':
-                program[pos] = OPCODE::WRITE;
+                program.push_back(OPCODE::WRITE);
                 break;
             case ',':
-                program[pos] = OPCODE::READ;
+                program.push_back(OPCODE::READ);
                 break;
             default:
                 break;
