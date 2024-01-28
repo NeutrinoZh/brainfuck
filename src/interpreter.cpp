@@ -1,4 +1,7 @@
 #include "interpreter.h"
+
+#include <cstdio>
+
 #include "opcodes.h"
 
 namespace bf {
@@ -14,12 +17,12 @@ Interpreter::VM::~VM() {
     delete[] memory;
 }
 
-Interpreter::Interpreter(size_t _ram) : m_vm(_ram) {}
+Interpreter::Interpreter(size_t _ram) : m_vm(_ram) {
+}
 
 void Interpreter::run(std::vector<OPCODE>& _program) {
     size_t brc;
-    for (size_t it = 0; it < _program.size(); ++it)
-        switch (_program[it]) {
+    for (size_t it = 0; it < _program.size(); ++it) switch (_program[it]) {
             case OPCODE::INC:
                 ++m_vm.memory[m_vm.pointer];
                 break;
@@ -39,8 +42,10 @@ void Interpreter::run(std::vector<OPCODE>& _program) {
                 brc = 1;
                 while (brc) {
                     ++it;
-                    if (_program[it] == OPCODE::JMP_FW) ++brc;
-                    if (_program[it] == OPCODE::JMP_BK) --brc; 
+                    if (_program[it] == OPCODE::JMP_FW)
+                        ++brc;
+                    if (_program[it] == OPCODE::JMP_BK)
+                        --brc;
                 }
 
                 break;
@@ -51,8 +56,10 @@ void Interpreter::run(std::vector<OPCODE>& _program) {
                 brc = 1;
                 while (brc) {
                     --it;
-                    if (_program[it] == OPCODE::JMP_FW) --brc;
-                    if (_program[it] == OPCODE::JMP_BK) ++brc;
+                    if (_program[it] == OPCODE::JMP_FW)
+                        --brc;
+                    if (_program[it] == OPCODE::JMP_BK)
+                        ++brc;
                 }
 
                 //--it;
@@ -62,11 +69,11 @@ void Interpreter::run(std::vector<OPCODE>& _program) {
                 std::cout << m_vm.memory[m_vm.pointer];
                 break;
             case OPCODE::READ:
-                std::cin >> m_vm.memory[m_vm.pointer];
+                m_vm.memory[m_vm.pointer] = getchar();
                 break;
             default:
                 break;
         }
 }
 
-}
+}  // namespace bf

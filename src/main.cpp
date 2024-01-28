@@ -6,7 +6,7 @@ int main(int argc, char** argv) {
         std::cerr << "Usage: $ brainfuck [source]" << std::endl;
         return EXIT_FAILURE;
     }
-    
+
     std::ifstream file(argv[1], std::ios_base::binary);
     if (!file.is_open()) {
         std::cerr << "File " << argv[1] << " not found" << std::endl;
@@ -27,6 +27,6 @@ int main(int argc, char** argv) {
 
     bf::Interpreter interpreter(10000);
     interpreter.run(program);
-    
+
     return EXIT_SUCCESS;
 }

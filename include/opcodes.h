@@ -11,7 +11,7 @@ enum class OPCODE {
 
     JMP_FW,
     JMP_BK,
-        
+
     WRITE,
     READ,
 };
