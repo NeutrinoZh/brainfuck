@@ -20,20 +20,21 @@ Interpreter::VM::~VM() {
 Interpreter::Interpreter(size_t _ram) : m_vm(_ram) {
 }
 
-void Interpreter::run(std::vector<OPCODE>& _program) {
+void Interpreter::run(std::vector<Statement>& _program) {
     size_t brc;
-    for (size_t it = 0; it < _program.size(); ++it) switch (_program[it]) {
+    for (size_t it = 0; it < _program.size(); ++it)
+        switch (_program[it].opCode) {
             case OPCODE::INC:
-                ++m_vm.memory[m_vm.pointer];
+                m_vm.memory[m_vm.pointer] += _program[it].arg;
                 break;
             case OPCODE::DEC:
-                --m_vm.memory[m_vm.pointer];
+                m_vm.memory[m_vm.pointer] -= _program[it].arg;
                 break;
             case OPCODE::NEXT:
-                ++m_vm.pointer;
+                m_vm.pointer += _program[it].arg;
                 break;
             case OPCODE::PREV:
-                --m_vm.pointer;
+                m_vm.pointer -= _program[it].arg;
                 break;
             case OPCODE::JMP_FW:
                 if (m_vm.memory[m_vm.pointer] != 0)
@@ -42,9 +43,9 @@ void Interpreter::run(std::vector<OPCODE>& _program) {
                 brc = 1;
                 while (brc) {
                     ++it;
-                    if (_program[it] == OPCODE::JMP_FW)
+                    if (_program[it].opCode == OPCODE::JMP_FW)
                         ++brc;
-                    if (_program[it] == OPCODE::JMP_BK)
+                    if (_program[it].opCode == OPCODE::JMP_BK)
                         --brc;
                 }
 
@@ -56,9 +57,9 @@ void Interpreter::run(std::vector<OPCODE>& _program) {
                 brc = 1;
                 while (brc) {
                     --it;
-                    if (_program[it] == OPCODE::JMP_FW)
+                    if (_program[it].opCode == OPCODE::JMP_FW)
                         --brc;
-                    if (_program[it] == OPCODE::JMP_BK)
+                    if (_program[it].opCode == OPCODE::JMP_BK)
                         ++brc;
                 }
 
