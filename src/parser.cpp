@@ -45,6 +45,40 @@ std::vector<Statement> Parser::parse(std::vector<char>& _rawInput) {
             default:
                 break;
         }
+
+    pos = 0;
+    for (; pos < program.size(); ++pos)
+        switch (program[pos].opCode) {
+            case OPCODE::JMP_FW: {
+                int it = pos;
+                size_t brc = 1;
+                while (brc) {
+                    ++it;
+                    if (program[it].opCode == OPCODE::JMP_FW)
+                        ++brc;
+                    if (program[it].opCode == OPCODE::JMP_BK)
+                        --brc;
+                }
+
+                program[pos].arg = it;
+            }
+            case OPCODE::JMP_BK: {
+                size_t brc = 1;
+                int it = pos;
+
+                while (brc) {
+                    --it;
+                    if (program[it].opCode == OPCODE::JMP_FW)
+                        --brc;
+                    if (program[it].opCode == OPCODE::JMP_BK)
+                        ++brc;
+                }
+
+                program[pos].arg = it;
+            }
+            default:
+                break;
+        }
         
     return program;
 }

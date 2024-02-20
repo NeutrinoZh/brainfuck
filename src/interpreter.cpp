@@ -39,32 +39,12 @@ void Interpreter::run(std::vector<Statement>& _program) {
             case OPCODE::JMP_FW:
                 if (m_vm.memory[m_vm.pointer] != 0)
                     continue;
-
-                brc = 1;
-                while (brc) {
-                    ++it;
-                    if (_program[it].opCode == OPCODE::JMP_FW)
-                        ++brc;
-                    if (_program[it].opCode == OPCODE::JMP_BK)
-                        --brc;
-                }
-
+                it = _program[it].arg;
                 break;
             case OPCODE::JMP_BK:
                 if (m_vm.memory[m_vm.pointer] == 0)
                     continue;
-
-                brc = 1;
-                while (brc) {
-                    --it;
-                    if (_program[it].opCode == OPCODE::JMP_FW)
-                        --brc;
-                    if (_program[it].opCode == OPCODE::JMP_BK)
-                        ++brc;
-                }
-
-                //--it;
-
+                it = _program[it].arg;
                 break;
             case OPCODE::WRITE:
                 std::cout << m_vm.memory[m_vm.pointer];
