@@ -26,7 +26,7 @@ int main(int argc, char** argv) {
     auto program = parser.parse(buffer);
 
     bf::Interpreter interpreter(10000);
-    //interpreter.run(program);
+    interpreter.run(program);
 
     return EXIT_SUCCESS;
 }

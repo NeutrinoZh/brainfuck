@@ -54,6 +54,8 @@ std::vector<Statement> Parser::parse(std::vector<char>& _rawInput) {
                 size_t brc = 1;
                 while (brc) {
                     ++it;
+                    if (it > program.size())
+                        std::cerr << "index out of range:" << it << "\n";
                     if (program[it].opCode == OPCODE::JMP_FW)
                         ++brc;
                     if (program[it].opCode == OPCODE::JMP_BK)
@@ -61,6 +63,7 @@ std::vector<Statement> Parser::parse(std::vector<char>& _rawInput) {
                 }
 
                 program[pos].arg = it;
+                break;
             }
             case OPCODE::JMP_BK: {
                 size_t brc = 1;
@@ -68,6 +71,8 @@ std::vector<Statement> Parser::parse(std::vector<char>& _rawInput) {
 
                 while (brc) {
                     --it;
+                    if (it < 0)
+                        std::cerr << "index out of range: " << it << "; pos: " << pos << "\n";
                     if (program[it].opCode == OPCODE::JMP_FW)
                         --brc;
                     if (program[it].opCode == OPCODE::JMP_BK)
@@ -75,6 +80,7 @@ std::vector<Statement> Parser::parse(std::vector<char>& _rawInput) {
                 }
 
                 program[pos].arg = it;
+                break;
             }
             default:
                 break;
