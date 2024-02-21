@@ -85,7 +85,19 @@ std::vector<Statement> Parser::parse(std::vector<char>& _rawInput) {
             default:
                 break;
         }
-        
+
+    int s = program.size() - 2;
+    pos = 0;
+    for (; pos < s; ++pos)
+        if (program[pos].opCode == OPCODE::JMP_FW &&
+            (program[pos + 1].opCode == OPCODE::INC || program[pos + 1].opCode == OPCODE::DEC) &&
+            program[pos + 2].opCode == OPCODE::JMP_BK) {
+            program[pos + 2].opCode = OPCODE::SET_ZERO;
+            program.erase(program.begin() + pos);
+            program.erase(program.begin() + pos);
+            s -= 2;
+        }
+    
     return program;
 }
 

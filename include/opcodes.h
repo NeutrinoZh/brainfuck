@@ -14,6 +14,8 @@ enum class OPCODE {
 
     WRITE,
     READ,
+
+    SET_ZERO,
 };
 
 }

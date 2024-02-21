@@ -22,8 +22,10 @@ Interpreter::Interpreter(size_t _ram) : m_vm(_ram) {
 
 void Interpreter::run(std::vector<Statement>& _program) {
     size_t brc;
-    for (size_t it = 0; it < _program.size(); ++it)
-        switch (_program[it].opCode) {
+    for (size_t it = 0; it < _program.size(); ++it) switch (_program[it].opCode) {
+            case OPCODE::SET_ZERO:
+                m_vm.memory[m_vm.pointer] = 0;
+                break;
             case OPCODE::INC:
                 m_vm.memory[m_vm.pointer] += _program[it].arg;
                 break;
