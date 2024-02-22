@@ -25,6 +25,7 @@ void Interpreter::run(std::vector<Statement>& _program) {
     for (size_t it = 0; it < _program.size(); ++it) switch (_program[it].opCode) {
             case OPCODE::SET_ZERO:
                 m_vm.memory[m_vm.pointer] = 0;
+                std::cout << m_vm.pointer << ": pointer\n";
                 break;
             case OPCODE::INC:
                 m_vm.memory[m_vm.pointer] += _program[it].arg;
@@ -39,17 +40,21 @@ void Interpreter::run(std::vector<Statement>& _program) {
                 m_vm.pointer -= _program[it].arg;
                 break;
             case OPCODE::JMP_FW:
-                if (m_vm.memory[m_vm.pointer] != 0)
+                if (m_vm.memory[m_vm.pointer] != 0) {
+                    std::cout << m_vm.pointer << ": jmpfw pointer\n";
                     continue;
+                }
                 it = _program[it].arg;
                 break;
             case OPCODE::JMP_BK:
-                if (m_vm.memory[m_vm.pointer] == 0)
+                if (m_vm.memory[m_vm.pointer] == 0) {
+                    std::cout << m_vm.pointer << ": jmpbk pointer\n";
                     continue;
+                }
                 it = _program[it].arg;
                 break;
             case OPCODE::WRITE:
-                std::cout << m_vm.memory[m_vm.pointer];
+                std::cout << (int)m_vm.memory[m_vm.pointer];
                 break;
             case OPCODE::READ:
                 m_vm.memory[m_vm.pointer] = getchar();
