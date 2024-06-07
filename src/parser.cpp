@@ -48,6 +48,17 @@ std::vector<Statement> Parser::parse(std::vector<char>& _rawInput) {
         }
 
     pos = 0;
+    for (; pos < program.size(); ++pos) {
+        if (program[pos].opCode == OPCODE::JMP_FW &&
+            (program[pos + 1].opCode == OPCODE::INC || program[pos + 1].opCode == OPCODE::DEC) &&
+            program[pos + 2].opCode == OPCODE::JMP_BK) {
+            program[pos + 2].opCode = OPCODE::SET_ZERO;
+            program.erase(program.begin() + pos);
+            program.erase(program.begin() + pos);
+        }
+    }
+
+    pos = 0;
     for (; pos < program.size(); ++pos)
         switch (program[pos].opCode) {
             case OPCODE::JMP_FW: {
@@ -86,17 +97,6 @@ std::vector<Statement> Parser::parse(std::vector<char>& _rawInput) {
             default:
                 break;
         }
-
-    pos = 0;
-    for (; pos < program.size(); ++pos) {
-        if (program[pos].opCode == OPCODE::JMP_FW &&
-            (program[pos + 1].opCode == OPCODE::INC || program[pos + 1].opCode == OPCODE::DEC) &&
-            program[pos + 2].opCode == OPCODE::JMP_BK) {
-            program[pos + 2].opCode = OPCODE::SET_ZERO;
-            program.erase(program.begin() + pos);
-            program.erase(program.begin() + pos);
-        }
-    }
     
     return program;
 }
