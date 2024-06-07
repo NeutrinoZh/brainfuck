@@ -24,11 +24,6 @@ int main(int argc, char** argv) {
 
     bf::Parser parser;
     auto program = parser.parse(buffer);
-
-    for (auto code : program)
-        std::cout << (int)code.opCode << " ";
-
-    std::cout << "\nResult: \n";
     
     bf::Interpreter interpreter(10000);
     interpreter.run(program);
