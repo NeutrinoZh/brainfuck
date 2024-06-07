@@ -1,12 +1,12 @@
 #pragma once
 
 #include "utils.h"
-#include "opcodes.h"
+#include "statement.h"
 
 namespace bf {
 class Parser {
 public:
-    std::vector<OPCODE> parse(std::vector<char>& rawInput);    
+    std::vector<Statement> parse(std::vector<char>& rawInput);    
 };
 
 }

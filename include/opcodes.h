@@ -3,17 +3,19 @@
 namespace bf {
 
 enum class OPCODE {
-    INC,
-    DEC,
+    INC, // 0
+    DEC, // 1
 
-    NEXT,
-    PREV,
+    NEXT, // 2
+    PREV, // 3
 
-    JMP_FW,
-    JMP_BK,
+    JMP_FW, // 4
+    JMP_BK, // 5
 
-    WRITE,
-    READ,
+    WRITE, // 6
+    READ,  // 7
+
+    SET_ZERO, // 8
 };
 
 }

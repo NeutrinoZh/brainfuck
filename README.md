@@ -44,6 +44,13 @@ Brainfuck consists of only 8 commands:
 - `,`: Input a character (ASCII)
 - `.`: Output a character (ASCII)
 
+## Interpreter optimization
+
+- Replacing multiple `>` or `<` with one instruction with a parameter of count increments or decrements pointer.
+- Replacing multiple `+` or `-` with one instruction with a parameter of value for incrementing or decrementing the value of the current cell.
+- Saving instruction numbers for `[` and `]` allows executing jumps between corresponding instructions without the need to iterate over all instructions, preventing delays in program execution.
+- Optimizing `[+]` and `[-]` into one instruction `set_zero`
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE.txt) file for details.

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "opcodes.h"
+#include "statement.h"
 #include "utils.h"
 
 namespace bf {
@@ -18,7 +18,7 @@ private:
 public:
     Interpreter(size_t ram);
 
-    void run(std::vector<OPCODE>& program);
+    void run(std::vector<Statement>& program);
 };
 
 }  // namespace bf

@@ -24,7 +24,7 @@ int main(int argc, char** argv) {
 
     bf::Parser parser;
     auto program = parser.parse(buffer);
-
+    
     bf::Interpreter interpreter(10000);
     interpreter.run(program);
 
