@@ -1,13 +1,16 @@
+#include "compiler.h"
 #include "interpreter.h"
 #include "parser.h"
 
 int main(int argc, char** argv) {
-    if (argc < 2) {
-        std::cerr << "Usage: $ brainfuck [source]" << std::endl;
-        return EXIT_FAILURE;
-    }
+    // if (argc < 2) {
+    //     std::cerr << "Usage: $ brainfuck [source]" << std::endl;
+    //     return EXIT_FAILURE;
+    // }
 
-    std::ifstream file(argv[1], std::ios_base::binary);
+    // argv[1]
+    std::ifstream file("/home/neutrinozh/Dev/brainfuck/examples/hello-world.bf",
+                       std::ios_base::binary);
     if (!file.is_open()) {
         std::cerr << "File " << argv[1] << " not found" << std::endl;
         return EXIT_FAILURE;
@@ -24,9 +27,12 @@ int main(int argc, char** argv) {
 
     bf::Parser parser;
     auto program = parser.parse(buffer);
-    
-    bf::Interpreter interpreter(10000);
-    interpreter.run(program);
+
+    // bf::Interpreter interpreter(10000);
+    // interpreter.run(program);
+
+    bf::Compiler compiler;
+    compiler.run(program);
 
     return EXIT_SUCCESS;
 }
